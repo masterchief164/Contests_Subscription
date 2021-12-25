@@ -33,16 +33,16 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        listener = NavController.OnDestinationChangedListener{controller,destination,args->
-            if(destination.id == R.id.upcomingContests)
-            {
+        listener = NavController.OnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.upcomingContests) {
                 supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.design_default_color_primary_dark)))
-            }
-            else if(destination.id == R.id.splashScreen){
+                supportActionBar?.title= "asegstrjy"
+            } else if (destination.id == R.id.splashScreen) {
                 supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.teal_700)))
             }
         }
     }
+
 
     override fun onResume() {
         super.onResume()

@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/drawable/image_rounded.xml" value="0.290625" />
+        <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout-v28/contest_item_layout.xml" value="0.23097826086956522" />
         <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/fragment_splash_screen.xml" value="0.27447916666666666" />
-        <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/fragment_upcoming_contests.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/contest_item_layout.xml" value="0.176" />
+        <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/fragment_splash_screen.xml" value="0.2" />
+        <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/fragment_upcoming_contests.xml" value="0.264" />
         <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/list_item_layout.xml" value="0.24456521739130435" />
         <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/menu/menu.xml" value="0.27447916666666666" />
       </map>
