@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_upcomingContests_to_splashScreen"
             app:destination="@id/splashScreen" />
-        <action
-            android:id="@+id/action_upcomingContests_to_loginFragment"
-            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashScreen"

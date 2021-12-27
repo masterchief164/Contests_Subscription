@@ -1,7 +1,6 @@
 package com.example.contestssubscription
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+
+
+
 
 
 
@@ -23,6 +23,7 @@ class LoginFragment : Fragment() {
     private lateinit var loginButton: Button
     private lateinit var password: EditText
     private lateinit var email: EditText
+
     private lateinit var loginRegisterViewModel: LoginRegisterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,41 +47,17 @@ class LoginFragment : Fragment() {
         })
 
         loginButton.setOnClickListener {
-            when {
-                TextUtils.isEmpty(email.text.toString().trim() { it <= ' ' }) -> {
-                    Toast.makeText(
-                        activity,
-                        "Please enter Email Address",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-                TextUtils.isEmpty(password.text.toString().trim() { it <= ' ' }) -> {
-                    Toast.makeText(
-                        activity,
-                        "Please enter Password",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-                else -> {
-                    val emailText = email.text.toString().trim() { it <= ' ' }
-                    val passwordText = password.text.toString().trim() { it <= ' ' }
-
-                    FirebaseAuth.getInstance()
-                        .createUserWithEmailAndPassword(emailText, passwordText)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                val fireBaseUser: FirebaseUser = task.result!!.user!!
-                                Toast.makeText(
-                                    activity,
-                                    "Registration Successful",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
-
-                }
+            val emailText: String = email.text.toString()
+            val passwordText: String = password.text.toString()
+            if (emailText.isNotEmpty() && passwordText.isNotEmpty()) {
+                loginRegisterViewModel.login(emailText, passwordText)
+            } else {
+                Toast.makeText(
+                    context,
+                    "Email Address and Password Must Be Entered",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-
         }
 
         return view
