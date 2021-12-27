@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 class UpcomingContests : Fragment() {
 
-    //    private lateinit var factory:ContestsViewModelFactory
-//    private lateinit var viewModel: ContestsViewModel
     private lateinit var recyclerView: RecyclerView
     lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var contestViewModel: ContestsViewModel

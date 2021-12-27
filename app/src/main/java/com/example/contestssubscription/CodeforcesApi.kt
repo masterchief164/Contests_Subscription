@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface CodeforcesApi {
     @GET("contest.list")
-    fun getContests(): Call<ContestData>
+     fun getContests(): Call<ContestData>
 
 }

@@ -32,12 +32,12 @@ class MainActivity : AppCompatActivity() {
         navigationView.setupWithNavController(navController)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
-
+        supportActionBar?.setIcon(R.drawable.ic_launcher_background)
         listener = NavController.OnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.upcomingContests) {
+            if (destination.id == R.id.splashScreen) {
                 supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.design_default_color_primary_dark)))
-                supportActionBar?.title= "asegstrjy"
-            } else if (destination.id == R.id.splashScreen) {
+                supportActionBar?.title= "Contests"
+            } else if (destination.id == R.id.upcomingContests) {
                 supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.teal_700)))
             }
         }
