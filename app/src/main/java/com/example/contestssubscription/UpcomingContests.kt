@@ -1,6 +1,7 @@
 package com.example.contestssubscription
 
 import android.os.Bundle
+import android.util.Log.e
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,12 @@ class UpcomingContests : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var contestViewModel: ContestsViewModel
+    private lateinit var loggedInViewModel: LoggedInViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        loggedInViewModel = ViewModelProvider(this)[LoggedInViewModel::class.java]
+    }
 
 
     override fun onCreateView(
@@ -27,8 +33,8 @@ class UpcomingContests : Fragment() {
         linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
 
-        contestViewModel = ViewModelProvider(this)[ContestsViewModel::class.java]
-        contestViewModel.getContests().observe(viewLifecycleOwner, {
+        e("Upcoming",loggedInViewModel.getLoggedOutLiveData().value.toString())
+        loggedInViewModel.getContests().observe(viewLifecycleOwner, {
             recyclerView.adapter = ContestAdapter(it)
         })
 

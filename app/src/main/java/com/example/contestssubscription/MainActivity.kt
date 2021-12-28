@@ -4,6 +4,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -17,12 +18,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var loggedInViewModel: LoggedInViewModel
+
 
     private lateinit var listener: NavController.OnDestinationChangedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        loggedInViewModel = ViewModelProvider(this)[LoggedInViewModel::class.java]
 
 
         navController = findNavController(R.id.fragmentContainerView)
@@ -32,13 +36,19 @@ class MainActivity : AppCompatActivity() {
         navigationView.setupWithNavController(navController)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
-        supportActionBar?.setIcon(R.drawable.ic_launcher_background)
         listener = NavController.OnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.splashScreen) {
-                supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.design_default_color_primary_dark)))
-                supportActionBar?.title= "Contests"
-            } else if (destination.id == R.id.upcomingContests) {
-                supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.teal_700)))
+            when (destination.id) {
+                R.id.splashScreen -> {
+                    supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.design_default_color_primary_dark)))
+                    supportActionBar?.title = "Contests"
+                }
+                R.id.upcomingContests -> {
+                    supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.teal_700)))
+                }
+                R.id.loginFragment -> {
+        //                navigationView.menu.getItem(R.id.loginFragment).title = "Logout"
+                    loggedInViewModel.logOut()
+                }
             }
         }
     }

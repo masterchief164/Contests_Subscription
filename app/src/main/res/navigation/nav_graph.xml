@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/upcomingContests">
 
     <fragment
         android:id="@+id/upcomingContests"
@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_upcoming_contests" >
         <action
             android:id="@+id/action_upcomingContests_to_splashScreen"
-            app:destination="@id/splashScreen" />
+            app:destination="@id/splashScreen"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_upcomingContests_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashScreen"
@@ -21,10 +25,8 @@
         tools:layout="@layout/fragment_splash_screen" >
         <action
             android:id="@+id/action_splashScreen_to_upcomingContests"
-            app:destination="@id/upcomingContests" />
-        <action
-            android:id="@+id/action_splashScreen_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/upcomingContests"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -33,6 +35,9 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_upcomingContests"
-            app:destination="@id/upcomingContests" />
+            app:destination="@id/upcomingContests"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splashScreen"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

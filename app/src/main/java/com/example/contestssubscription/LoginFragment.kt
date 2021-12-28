@@ -13,11 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 
 
-
-
-
-
-
 class LoginFragment : Fragment() {
 
     private lateinit var loginButton: Button
@@ -43,7 +38,7 @@ class LoginFragment : Fragment() {
         password = view.findViewById(R.id.editTextTextPassword)
 
         loginRegisterViewModel.getUserLiveData().observe(viewLifecycleOwner, Observer {
-                Navigation.findNavController(view).navigate(R.id.upcomingContests)
+            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_upcomingContests)
         })
 
         loginButton.setOnClickListener {
