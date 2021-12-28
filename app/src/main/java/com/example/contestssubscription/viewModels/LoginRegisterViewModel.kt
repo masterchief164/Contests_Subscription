@@ -1,8 +1,9 @@
-package com.example.contestssubscription
+package com.example.contestssubscription.viewModels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.example.contestssubscription.repository.AuthAppRepository
 import com.google.firebase.auth.FirebaseUser
 
 

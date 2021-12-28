@@ -1,5 +1,6 @@
-package com.example.contestssubscription
+package com.example.contestssubscription.apis
 
+import com.example.contestssubscription.data.ContestData
 import retrofit2.Call
 import retrofit2.http.GET
 

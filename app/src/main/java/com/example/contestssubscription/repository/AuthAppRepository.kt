@@ -1,4 +1,4 @@
-package com.example.contestssubscription
+package com.example.contestssubscription.repository
 
 import android.app.Application
 import android.util.Log
@@ -6,6 +6,9 @@ import android.util.Log.e
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.contestssubscription.apis.CodeforcesApi
+import com.example.contestssubscription.data.Contest
+import com.example.contestssubscription.data.ContestData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import retrofit2.Call
@@ -32,7 +35,7 @@ class AuthAppRepository(private val application: Application) {
             .createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    userLiveData.postValue(firebaseAuth.currentUser);
+                    userLiveData.postValue(firebaseAuth.currentUser)
                     Toast.makeText(
                         application,
                         "Registration Successful",
@@ -44,7 +47,7 @@ class AuthAppRepository(private val application: Application) {
                         application,
                         "Registration Failed",
                         Toast.LENGTH_SHORT
-                    ).show();
+                    ).show()
                 }
 
             }
@@ -58,7 +61,7 @@ class AuthAppRepository(private val application: Application) {
 
                     Toast.makeText(
                         application,
-                        "Logout Successful",
+                        "Login Successful",
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
@@ -67,7 +70,7 @@ class AuthAppRepository(private val application: Application) {
                         application,
                         "Login Failed",
                         Toast.LENGTH_SHORT
-                    ).show();
+                    ).show()
                 }
             }
     }
@@ -107,7 +110,7 @@ class AuthAppRepository(private val application: Application) {
         val retrofitData = retrofitBuilder.getContests()
         retrofitData.enqueue(object : Callback<ContestData?> {
             override fun onResponse(call: Call<ContestData?>, response: Response<ContestData?>) {
-                Log.d("Upcomming Contests", "got Data")
+                Log.d("Upcoming Contests", "got Data")
                 val respBody = response.body()?.result!!
                 contestsData.value = respBody
             }

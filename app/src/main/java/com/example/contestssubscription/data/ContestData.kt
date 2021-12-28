@@ -1,4 +1,4 @@
-package com.example.contestssubscription
+package com.example.contestssubscription.data
 
 data class ContestData(
     val result: ArrayList<Contest>,

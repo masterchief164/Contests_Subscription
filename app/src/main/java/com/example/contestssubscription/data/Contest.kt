@@ -1,4 +1,4 @@
-package com.example.contestssubscription
+package com.example.contestssubscription.data
 
 data class Contest(
     val name: String,

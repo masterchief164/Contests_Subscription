@@ -1,4 +1,4 @@
-package com.example.contestssubscription
+package com.example.contestssubscription.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.contestssubscription.data.Contest
+import com.example.contestssubscription.R
 
 class ContestAdapter(private val contests: ArrayList<Contest>) :
     RecyclerView.Adapter<ContestAdapter.ContestViewHolder>() {
