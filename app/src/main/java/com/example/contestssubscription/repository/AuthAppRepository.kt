@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.contestssubscription.apis.CodeforcesApi
 import com.example.contestssubscription.data.Contest
 import com.example.contestssubscription.data.ContestData
+import com.example.contestssubscription.data.SiteRoomDatabase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import retrofit2.Call
@@ -21,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class AuthAppRepository(private val application: Application) {
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val userLiveData: MutableLiveData<FirebaseUser> = MutableLiveData()
+    val database: SiteRoomDatabase by lazy { SiteRoomDatabase.getDatabase(application) }
     private val loggedOutLiveData: MutableLiveData<Boolean> = if (firebaseAuth.currentUser != null) {
         userLiveData.postValue(firebaseAuth.currentUser)
         MutableLiveData(false)
@@ -53,8 +55,8 @@ class AuthAppRepository(private val application: Application) {
             }
     }
 
-    fun login(email: String?, password: String?) {
-        firebaseAuth.signInWithEmailAndPassword(email!!, password!!)
+    fun login(email: String, password: String) {
+        firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     userLiveData.postValue(firebaseAuth.currentUser)
