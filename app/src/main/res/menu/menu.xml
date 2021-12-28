@@ -2,13 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/loginFragment"
-            android:title="@string/login"/>
+        <item
+            android:id="@+id/loginFragment"
+            android:title="@string/login" />
         <item
             android:id="@+id/upcomingContests"
             android:title="@string/upcomingcontests" />
         <item
-            android:id="@+id/splashScreen"
-            android:title="splash Screen" />
+            android:id="@+id/selectSites"
+            android:title="@string/select_sites" />
+        <item
+            android:id="@+id/about"
+            android:title="@string/about" />
     </group>
 </menu>

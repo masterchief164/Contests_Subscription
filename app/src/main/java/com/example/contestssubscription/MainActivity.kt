@@ -39,15 +39,16 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         listener = NavController.OnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.splashScreen -> {
+                R.id.about -> {
                     supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.design_default_color_primary_dark)))
-                    supportActionBar?.title = "Contests"
+                    supportActionBar?.title = "About"
                 }
                 R.id.upcomingContests -> {
                     supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.teal_700)))
+                    supportActionBar?.title = "All Contests"
                 }
                 R.id.loginFragment -> {
-        //                navigationView.menu.getItem(R.id.loginFragment).title = "Logout"
+                    supportActionBar?.title = "Login"
                     loggedInViewModel.logOut()
                 }
             }
