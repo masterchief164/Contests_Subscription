@@ -23,4 +23,10 @@
     <string name="title_activity_login2">LoginActivity2</string>
     <string name="about">About</string>
     <string name="select_sites">Select Sites</string>
+    <string name="select_your_sites">Select your sites</string>
+    <string name="contest_site_icon">Contest Site Icon</string>
+    <string name="site">Site</string>
+    <string name="codeforces">Codeforces</string>
+    <string name="codechef">CodeChef</string>
+    <string name="atcoder">AtCoder</string>
 </resources>
