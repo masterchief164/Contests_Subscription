@@ -21,11 +21,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 class AuthAppRepository(private val application: Application) {
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val userLiveData: MutableLiveData<FirebaseUser> = MutableLiveData()
-    private val loggedOutLiveData: MutableLiveData<Boolean> = if (firebaseAuth.currentUser != null) {
-        userLiveData.postValue(firebaseAuth.currentUser)
-        MutableLiveData(false)
-    } else
-        MutableLiveData(true)
+    private val loggedOutLiveData: MutableLiveData<Boolean> =
+        if (firebaseAuth.currentUser != null) {
+            userLiveData.value = firebaseAuth.currentUser
+            e("AuthApp", userLiveData.value.toString())
+            MutableLiveData(false)
+        } else
+            MutableLiveData(true)
     private var contestsData: MutableLiveData<ArrayList<Contest>> =
         MutableLiveData(ArrayList())
 
@@ -41,6 +43,7 @@ class AuthAppRepository(private val application: Application) {
                         "Registration Successful",
                         Toast.LENGTH_SHORT
                     ).show()
+
                 } else {
                     e("Registration", task.exception.toString())
                     Toast.makeText(
@@ -87,7 +90,7 @@ class AuthAppRepository(private val application: Application) {
     }
 
     fun getContests(): LiveData<ArrayList<Contest>> {
-        if(contestsData.value?.isEmpty() == true)
+        if (contestsData.value?.isEmpty() == true)
             getMyData()
         return contestsData
     }

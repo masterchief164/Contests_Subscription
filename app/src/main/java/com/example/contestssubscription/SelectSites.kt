@@ -9,9 +9,12 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import com.example.contestssubscription.data.UserApplication
 import com.example.contestssubscription.viewModels.LoggedInViewModel
 import com.example.contestssubscription.viewModels.UserSitesViewModel
 import com.example.contestssubscription.viewModels.UserSitesViewModelFactory
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 class SelectSites : Fragment() {
     private lateinit var codeforcesToggle: SwitchCompat
@@ -42,10 +45,13 @@ class SelectSites : Fragment() {
 
         val uid = loggedInViewModel.getUserLiveData().value?.uid
         if (uid != null) {
-            val settings = viewModel.retrieveUser(uid)
-            codeforcesToggle.isChecked = settings.codeforces
-            codeChefToggle.isChecked = settings.codeChef
-            atCoderToggle.isChecked = settings.atCoder
+            GlobalScope.async {
+                val settings = viewModel.retrieveUser(uid)
+                codeforcesToggle.isChecked = settings.codeforces
+                codeChefToggle.isChecked = settings.codeChef
+                atCoderToggle.isChecked = settings.atCoder
+            }
+
         }
         codeforcesToggle.setOnCheckedChangeListener { _, isChecked ->
 
@@ -62,10 +68,12 @@ class SelectSites : Fragment() {
 
             val message = if (isChecked) "CodeChef On" else "CodeChef off"
             Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
-            if (uid != null) {
-                val user = viewModel.retrieveUser(uid)
-                user.codeChef = codeChefToggle.isChecked
-                viewModel.updateUserData(user)
+            GlobalScope.async {
+                if (uid != null) {
+                    val user = viewModel.retrieveUser(uid)
+                    user.codeChef = codeChefToggle.isChecked
+                    viewModel.updateUserData(user)
+                }
             }
         }
         atCoderToggle.setOnCheckedChangeListener { _, isChecked ->

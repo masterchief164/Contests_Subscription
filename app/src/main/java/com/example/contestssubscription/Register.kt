@@ -1,19 +1,25 @@
 package com.example.contestssubscription
 
 import android.os.Bundle
+import android.util.Log.e
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import com.example.contestssubscription.data.UserApplication
 import com.example.contestssubscription.viewModels.LoginRegisterViewModel
 import com.example.contestssubscription.viewModels.UserSitesViewModel
 import com.example.contestssubscription.viewModels.UserSitesViewModelFactory
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 class Register : Fragment() {
 
@@ -44,13 +50,21 @@ class Register : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_register, container, false)
-        registerButton = view.findViewById(R.id.loginButton)
+        registerButton = view.findViewById(R.id.registerButton)
         email = view.findViewById(R.id.editTextTextEmailAddress)
         password = view.findViewById(R.id.editTextTextPassword)
+        confirmPassword = view.findViewById(R.id.confirmPassword)
+        name = view.findViewById(R.id.name)
+
+        val login: TextView = view.findViewById(R.id.login)
+
+        login.setOnClickListener {
+            findNavController().navigate(R.id.action_register_to_loginFragment)
+        }
 
         loginRegisterViewModel.getUserLiveData().observe(viewLifecycleOwner, {
             Navigation.findNavController(view)
-                .navigate(R.id.action_loginFragment_to_upcomingContests)
+                .navigate(R.id.action_register_to_upcomingContests)
         })
 
         registerButton.setOnClickListener {
@@ -64,8 +78,10 @@ class Register : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                 else {
-                    loginRegisterViewModel.register(emailText, passwordText)
-                    addUser()
+                    GlobalScope.async {
+                        loginRegisterViewModel.register(emailText, passwordText)
+                        addUser()
+                    }
                 }
             } else {
                 Toast.makeText(
@@ -80,6 +96,7 @@ class Register : Fragment() {
 
     private fun addUser() {
         val user = loginRegisterViewModel.getUserLiveData()
+        e("Register", user.value.toString())
         viewModel.addNewUser(
             name.text.toString(),
             user.value!!.uid,

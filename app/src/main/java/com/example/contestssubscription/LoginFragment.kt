@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.contestssubscription.data.User
+import com.example.contestssubscription.data.UserApplication
 import com.example.contestssubscription.viewModels.LoginRegisterViewModel
 import com.example.contestssubscription.viewModels.UserSitesViewModel
 import com.example.contestssubscription.viewModels.UserSitesViewModelFactory
@@ -46,6 +49,11 @@ class LoginFragment : Fragment() {
         loginButton = view.findViewById(R.id.loginButton)
         email = view.findViewById(R.id.editTextTextEmailAddress)
         password = view.findViewById(R.id.editTextTextPassword)
+
+        val register:TextView = view.findViewById(R.id.register)
+        register.setOnClickListener{
+            findNavController().navigate(R.id.action_loginFragment_to_register)
+        }
 
         loginRegisterViewModel.getUserLiveData().observe(viewLifecycleOwner, {
             Navigation.findNavController(view)

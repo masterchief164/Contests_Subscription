@@ -68,7 +68,7 @@
             android:text="@string/don_t_have_an_account" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/login"
             android:layout_marginStart="2sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,11 +99,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="@string/name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.304"
+        android:hint="@string/name"
         android:autofillHints="name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name="com.example.contestssubscription.data.UserApplication"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,12 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ContestsSubscription">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.contestssubscription.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

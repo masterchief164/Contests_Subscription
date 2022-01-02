@@ -12,7 +12,7 @@ interface UserDao {
     @Update
     suspend fun update(user: User)
 
-    @Query("SELECT * from user WHERE uid = :uid")
+    @Query("SELECT * from users WHERE uid = :uid")
     fun getUser(uid: String): User
 
 }
