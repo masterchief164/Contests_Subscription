@@ -9,7 +9,6 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
-import com.example.contestssubscription.data.UserApplication
 import com.example.contestssubscription.viewModels.LoggedInViewModel
 import com.example.contestssubscription.viewModels.UserSitesViewModel
 import com.example.contestssubscription.viewModels.UserSitesViewModelFactory

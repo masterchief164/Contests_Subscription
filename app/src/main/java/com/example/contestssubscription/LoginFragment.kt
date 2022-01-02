@@ -12,7 +12,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.contestssubscription.data.User
-import com.example.contestssubscription.data.UserApplication
 import com.example.contestssubscription.viewModels.LoginRegisterViewModel
 import com.example.contestssubscription.viewModels.UserSitesViewModel
 import com.example.contestssubscription.viewModels.UserSitesViewModelFactory

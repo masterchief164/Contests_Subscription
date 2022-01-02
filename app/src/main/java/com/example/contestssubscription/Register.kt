@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.example.contestssubscription.data.UserApplication
 import com.example.contestssubscription.viewModels.LoginRegisterViewModel
 import com.example.contestssubscription.viewModels.UserSitesViewModel
 import com.example.contestssubscription.viewModels.UserSitesViewModelFactory
@@ -27,7 +26,10 @@ class Register : Fragment() {
 
     private lateinit var loginRegisterViewModel: LoginRegisterViewModel
     private val viewModel: UserSitesViewModel by activityViewModels {
-        UserSitesViewModelFactory((activity?.application as UserApplication).database.userDao())
+        UserSitesViewModelFactory(
+            (activity?.application as UserApplication).database
+                .userDao()
+        )
     }
 
 
@@ -55,8 +57,16 @@ class Register : Fragment() {
             val emailText: String = email.text.toString()
             val passwordText: String = password.text.toString()
             if (emailText.isNotEmpty() && passwordText.isNotEmpty()) {
-                loginRegisterViewModel.register(emailText, passwordText)
-                addUser()
+                if (passwordText != confirmPassword.text.toString())
+                    Toast.makeText(
+                        context,
+                        "Passwords do not match",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                else {
+                    loginRegisterViewModel.register(emailText, passwordText)
+                    addUser()
+                }
             } else {
                 Toast.makeText(
                     context,
@@ -72,7 +82,11 @@ class Register : Fragment() {
         val user = loginRegisterViewModel.getUserLiveData()
         viewModel.addNewUser(
             name.text.toString(),
-            user.value!!.uid,email.text.toString(),true, atCoder = true, codeChef = true
+            user.value!!.uid,
+            email.text.toString(),
+            true,
+            atCoder = true,
+            codeChef = true
         )
     }
 
