@@ -3,14 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18355263157894736" />
+        <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/drawable/ic_launcher_background.xml" value="0.18355263157894736" />
         <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/drawable/image_rounded.xml" value="0.290625" />
         <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout-v28/contest_item_layout.xml" value="0.23097826086956522" />
         <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/activity_login.xml" value="0.17335526315789473" />
         <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/activity_register.xml" value="0.17335526315789473" />
         <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/contest_item_layout.xml" value="0.176" />
+        <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/fragment_about.xml" value="0.17335526315789473" />
         <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/fragment_blank.xml" value="0.13831967213114754" />
         <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/fragment_login.xml" value="0.17335526315789473" />
-        <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/fragment_register.xml" value="0.17335526315789473" />
+        <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/fragment_register.xml" value="0.16" />
         <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/fragment_select_sites.xml" value="0.16974043715846995" />
         <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/fragment_splash_screen.xml" value="0.2" />
         <entry key="..\:/Users/shasw/AndroidStudioProjects/ContestsSubscription/app/src/main/res/layout/fragment_upcoming_contests.xml" value="0.2" />
