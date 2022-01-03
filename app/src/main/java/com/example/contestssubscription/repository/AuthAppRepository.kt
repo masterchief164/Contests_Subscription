@@ -24,7 +24,7 @@ class AuthAppRepository(private val application: Application) {
     private val loggedOutLiveData: MutableLiveData<Boolean> =
         if (firebaseAuth.currentUser != null) {
             userLiveData.value = firebaseAuth.currentUser
-            e("AuthApp", userLiveData.value.toString())
+            e("AuthApp", userLiveData.value!!.uid)
             MutableLiveData(false)
         } else
             MutableLiveData(true)
@@ -37,7 +37,8 @@ class AuthAppRepository(private val application: Application) {
             .createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    userLiveData.postValue(firebaseAuth.currentUser)
+                    userLiveData.value = (firebaseAuth.currentUser)
+                    e("Auth app",userLiveData.value!!.uid)
                     Toast.makeText(
                         application,
                         "Registration Successful",
@@ -60,7 +61,8 @@ class AuthAppRepository(private val application: Application) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    userLiveData.postValue(firebaseAuth.currentUser)
+                    userLiveData.value=(firebaseAuth.currentUser)
+
 
                     Toast.makeText(
                         application,

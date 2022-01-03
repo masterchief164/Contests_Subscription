@@ -76,18 +76,4 @@ class LoginFragment : Fragment() {
 
         return view
     }
-
-    private fun addUser(
-        userName: String,
-        uid: String,
-        email: String,
-        codeforces: Boolean,
-        atCoder: Boolean,
-        codeChef: Boolean
-    ) {
-        viewModel.addNewUser(
-            userName, uid, email, codeforces, atCoder, codeChef
-
-        )
-    }
 }

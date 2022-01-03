@@ -20,6 +20,7 @@ import com.example.contestssubscription.viewModels.UserSitesViewModel
 import com.example.contestssubscription.viewModels.UserSitesViewModelFactory
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 
 class Register : Fragment() {
 
@@ -32,10 +33,7 @@ class Register : Fragment() {
 
     private lateinit var loginRegisterViewModel: LoginRegisterViewModel
     private val viewModel: UserSitesViewModel by activityViewModels {
-        UserSitesViewModelFactory(
-            (activity?.application as UserApplication).database
-                .userDao()
-        )
+        UserSitesViewModelFactory((activity?.application as UserApplication).database.userDao())
     }
 
 
@@ -80,6 +78,11 @@ class Register : Fragment() {
                 else {
                     GlobalScope.async {
                         loginRegisterViewModel.register(emailText, passwordText)
+                        e("wgr","awgtsrj")
+                        e("aTR","fhyjrny")
+                        delay(1000)
+                        viewModel.retrieveUser(loginRegisterViewModel.getUserLiveData().value!!.uid)
+
                         addUser()
                     }
                 }
@@ -94,9 +97,11 @@ class Register : Fragment() {
         return view
     }
 
-    private fun addUser() {
+    private suspend fun addUser() {
         val user = loginRegisterViewModel.getUserLiveData()
-        e("Register", user.value.toString())
+        e("Register","hello")
+        delay(1000)
+        e("Register", user.value!!.uid)
         viewModel.addNewUser(
             name.text.toString(),
             user.value!!.uid,
@@ -105,6 +110,7 @@ class Register : Fragment() {
             atCoder = true,
             codeChef = true
         )
+
     }
 
 }

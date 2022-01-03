@@ -1,5 +1,6 @@
 package com.example.contestssubscription.viewModels
 
+import android.util.Log.e
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -57,6 +58,7 @@ class UserSitesViewModel(private val userDao: UserDao) : ViewModel() {
         codeChef: Boolean
     ) {
         val newUser = getNewUserEntry(userName, uid, email, codeforces, atCoder, codeChef)
+        e("Vm","hawgt")
         insertUser(newUser)
     }
 

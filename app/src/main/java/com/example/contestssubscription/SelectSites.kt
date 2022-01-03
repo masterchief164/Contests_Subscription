@@ -1,6 +1,7 @@
 package com.example.contestssubscription
 
 import android.os.Bundle
+import android.util.Log.e
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +46,7 @@ class SelectSites : Fragment() {
 
         val uid = loggedInViewModel.getUserLiveData().value?.uid
         if (uid != null) {
+            e("Select Sites",uid)
             GlobalScope.async {
                 val settings = viewModel.retrieveUser(uid)
                 codeforcesToggle.isChecked = settings.codeforces
@@ -52,15 +54,19 @@ class SelectSites : Fragment() {
                 atCoderToggle.isChecked = settings.atCoder
             }
 
+        } else {
+            Toast.makeText(activity, "Please login to save settings", Toast.LENGTH_SHORT).show()
         }
         codeforcesToggle.setOnCheckedChangeListener { _, isChecked ->
 
             val message = if (isChecked) "Codeforces On" else "Codeforces off"
             Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
             if (uid != null) {
-                val user = viewModel.retrieveUser(uid)
-                user.codeforces = codeforcesToggle.isChecked
-                viewModel.updateUserData(user)
+                GlobalScope.async {
+                    val user = viewModel.retrieveUser(uid)
+                    user.codeforces = codeforcesToggle.isChecked
+                    viewModel.updateUserData(user)
+                }
             }
 
         }
@@ -81,9 +87,11 @@ class SelectSites : Fragment() {
             val message = if (isChecked) "AtCoder On" else "AtCoder off"
             Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
             if (uid != null) {
-                val user = viewModel.retrieveUser(uid)
-                user.atCoder = atCoderToggle.isChecked
-                viewModel.updateUserData(user)
+                GlobalScope.async {
+                    val user = viewModel.retrieveUser(uid)
+                    user.atCoder = atCoderToggle.isChecked
+                    viewModel.updateUserData(user)
+                }
             }
         }
         return view
