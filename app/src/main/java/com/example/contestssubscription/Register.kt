@@ -81,7 +81,7 @@ class Register : Fragment() {
                         e("wgr","awgtsrj")
                         e("aTR","fhyjrny")
                         delay(1000)
-                        viewModel.retrieveUser(loginRegisterViewModel.getUserLiveData().value!!.uid)
+                        viewModel.retrieveUser("dgr")
 
                         addUser()
                     }
