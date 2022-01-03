@@ -46,7 +46,6 @@ class SelectSites : Fragment() {
 
         val uid = loggedInViewModel.getUserLiveData().value?.uid
         if (uid != null) {
-            e("Select Sites",uid)
             GlobalScope.async {
                 val settings = viewModel.retrieveUser(uid)
                 codeforcesToggle.isChecked = settings.codeforces

@@ -78,8 +78,6 @@ class Register : Fragment() {
                 else {
                     GlobalScope.async {
                         loginRegisterViewModel.register(emailText, passwordText)
-                        e("wgr","awgtsrj")
-                        e("aTR","fhyjrny")
                         delay(1000)
                         viewModel.retrieveUser("dgr")
 
@@ -99,9 +97,7 @@ class Register : Fragment() {
 
     private suspend fun addUser() {
         val user = loginRegisterViewModel.getUserLiveData()
-        e("Register","hello")
         delay(1000)
-        e("Register", user.value!!.uid)
         viewModel.addNewUser(
             name.text.toString(),
             user.value!!.uid,

@@ -58,7 +58,6 @@ class UserSitesViewModel(private val userDao: UserDao) : ViewModel() {
         codeChef: Boolean
     ) {
         val newUser = getNewUserEntry(userName, uid, email, codeforces, atCoder, codeChef)
-        e("Vm","hawgt")
         insertUser(newUser)
     }
 

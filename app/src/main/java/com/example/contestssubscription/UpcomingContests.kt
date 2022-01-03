@@ -35,8 +35,6 @@ class UpcomingContests : Fragment() {
         linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
 
-        e("Upcoming",loggedInViewModel.getLoggedOutLiveData().value.toString())
-        e("Upcoming",loggedInViewModel.getUserLiveData().value.toString())
         loggedInViewModel.getContests().observe(viewLifecycleOwner, {
             recyclerView.adapter = ContestAdapter(it)
         })
