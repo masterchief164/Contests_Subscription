@@ -1,7 +1,6 @@
 package com.example.contestssubscription
 
 import android.os.Bundle
-import android.util.Log.e
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -94,5 +93,12 @@ class SelectSites : Fragment() {
             }
         }
         return view
+    }
+
+
+
+    override fun onStop() {
+        super.onStop()
+        Toast.makeText(activity,"Restart app for changes to take place", Toast.LENGTH_SHORT).show()
     }
 }

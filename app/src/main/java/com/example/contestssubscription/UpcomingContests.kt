@@ -1,7 +1,7 @@
 package com.example.contestssubscription
 
 import android.os.Bundle
-import android.util.Log.e
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +28,10 @@ class UpcomingContests : Fragment() {
     private val viewModel: UserSitesViewModel by activityViewModels {
         UserSitesViewModelFactory((activity?.application as UserApplication).database.userDao())
     }
+    var codeforces = true
+    var codeChef = true
+    var atCoder = true
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,23 +48,8 @@ class UpcomingContests : Fragment() {
         recyclerView.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
-        var codeforces = true
-        var codeChef = true
-        var atCoder = true
 
-        loggedInViewModel.getUserLiveData().value?.uid?.let { e("upcom", it) }
-        val uid = loggedInViewModel.getUserLiveData().value?.uid
-        if (uid != null) {
-            GlobalScope.async {
-                val settings = viewModel.retrieveUser(uid)
-                e("sdg0", "sadhrt")
-                codeforces = settings.codeforces
-                codeChef = settings.codeChef
-                atCoder = settings.atCoder
-                val data = loggedInViewModel.getContests(codeforces, codeChef, atCoder).value
-                contestAdapter.updateData(data!!)
-            }
-        }
+
 
         loggedInViewModel.getContests(codeforces, codeChef, atCoder)
             .observe(viewLifecycleOwner, {
@@ -69,6 +58,23 @@ class UpcomingContests : Fragment() {
             })
 
         return view
+    }
+
+    override fun onStart() {
+        loggedInViewModel.getUserLiveData().value?.uid?.let { Log.e("upcom", it) }
+        val uid = loggedInViewModel.getUserLiveData().value?.uid
+        if (uid != null) {
+            GlobalScope.async {
+                val settings = viewModel.retrieveUser(uid)
+                Log.e("sdg0", "sadhrt")
+                codeforces = settings.codeforces
+                codeChef = settings.codeChef
+                atCoder = settings.atCoder
+                val data = loggedInViewModel.getContests(codeforces, codeChef, atCoder).value
+                contestAdapter.updateData(data!!)
+            }
+        }
+        super.onStart()
     }
 
 }
