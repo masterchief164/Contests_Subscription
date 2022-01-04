@@ -6,11 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contestssubscription.adapters.ContestAdapter
+import com.example.contestssubscription.data.UserApplication
 import com.example.contestssubscription.viewModels.LoggedInViewModel
+import com.example.contestssubscription.viewModels.UserSitesViewModel
+import com.example.contestssubscription.viewModels.UserSitesViewModelFactory
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 
 class UpcomingContests : Fragment() {
@@ -18,12 +24,16 @@ class UpcomingContests : Fragment() {
     private lateinit var recyclerView: RecyclerView
     lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var loggedInViewModel: LoggedInViewModel
+    private val contestAdapter: ContestAdapter = ContestAdapter(ArrayList())
+    private val viewModel: UserSitesViewModel by activityViewModels {
+        UserSitesViewModelFactory((activity?.application as UserApplication).database.userDao())
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loggedInViewModel = ViewModelProvider(this)[LoggedInViewModel::class.java]
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,10 +44,29 @@ class UpcomingContests : Fragment() {
         recyclerView.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = linearLayoutManager
+        var codeforces = true
+        var codeChef = true
+        var atCoder = true
 
-        loggedInViewModel.getContests().observe(viewLifecycleOwner, {
-            recyclerView.adapter = ContestAdapter(it)
-        })
+        loggedInViewModel.getUserLiveData().value?.uid?.let { e("upcom", it) }
+        val uid = loggedInViewModel.getUserLiveData().value?.uid
+        if (uid != null) {
+            GlobalScope.async {
+                val settings = viewModel.retrieveUser(uid)
+                e("sdg0", "sadhrt")
+                codeforces = settings.codeforces
+                codeChef = settings.codeChef
+                atCoder = settings.atCoder
+                val data = loggedInViewModel.getContests(codeforces, codeChef, atCoder).value
+                contestAdapter.updateData(data!!)
+            }
+        }
+
+        loggedInViewModel.getContests(codeforces, codeChef, atCoder)
+            .observe(viewLifecycleOwner, {
+                contestAdapter.updateData(it)
+                recyclerView.adapter = contestAdapter
+            })
 
         return view
     }

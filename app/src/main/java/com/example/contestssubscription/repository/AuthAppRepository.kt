@@ -90,10 +90,13 @@ class AuthAppRepository(private val application: Application) {
         ).show()
     }
 
-    fun getContests(): LiveData<ArrayList<Contest>> {
+    fun getContests(
+        codeforces: Boolean,
+        codeChef: Boolean,
+        atCoder: Boolean
+    ): LiveData<ArrayList<Contest>> {
         if (contestsData.value?.isEmpty() == true)
-            getMyData()
-//        getData()
+            getMyData(codeforces, codeChef, atCoder)
         return contestsData
     }
 
@@ -105,7 +108,7 @@ class AuthAppRepository(private val application: Application) {
         return loggedOutLiveData
     }
 
-    private fun getMyData() {
+    private fun getMyData(codeforces: Boolean, codeChef: Boolean, atCoder: Boolean) {
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://kontests.net/api/v1/")
@@ -118,65 +121,75 @@ class AuthAppRepository(private val application: Application) {
 
         val data: ArrayList<Contest> = ArrayList()
 
-        val retrofitDataCodeForces = retrofitBuilder.getCodeforces()
-        retrofitDataCodeForces.enqueue(object : Callback<ArrayList<Contest>?> {
-            override fun onResponse(
-                call: Call<ArrayList<Contest>?>,
-                response: Response<ArrayList<Contest>?>
-            ) {
-                Log.d("Upcoming Contests", "got Data116")
-                val respBody = response.body()!!
-                data.addAll(respBody)
-                f1 = true
-            }
+        if (codeforces) {
+            val retrofitDataCodeForces = retrofitBuilder.getCodeforces()
+            retrofitDataCodeForces.enqueue(object : Callback<ArrayList<Contest>?> {
+                override fun onResponse(
+                    call: Call<ArrayList<Contest>?>,
+                    response: Response<ArrayList<Contest>?>
+                ) {
+                    val respBody = response.body()!!
+                    data.addAll(respBody)
+                    f1 = true
+                }
 
-            override fun onFailure(call: Call<ArrayList<Contest>?>, t: Throwable) {
-                e("Upcoming Contests", t.message.toString())
-            }
-        })
+                override fun onFailure(call: Call<ArrayList<Contest>?>, t: Throwable) {
+                    e("Upcoming Contests", t.message.toString())
+                    f1 = true
+                }
+            })
+        } else
+            f1 = true
 
+        if (codeChef) {
+            val retrofitDataCodeChef = retrofitBuilder.getCodeChef()
+            retrofitDataCodeChef.enqueue(object : Callback<ArrayList<Contest>?> {
+                override fun onResponse(
+                    call: Call<ArrayList<Contest>?>,
+                    response: Response<ArrayList<Contest>?>
+                ) {
+                    val resp = response.body()!!
+                    data.addAll(resp)
+                    f2 = true
+                }
 
-        val retrofitDataCodeChef = retrofitBuilder.getCodeChef()
-        retrofitDataCodeChef.enqueue(object : Callback<ArrayList<Contest>?> {
-            override fun onResponse(
-                call: Call<ArrayList<Contest>?>,
-                response: Response<ArrayList<Contest>?>
-            ) {
-                Log.d("Upcoming Contests", "got Data125")
-                val resp = response.body()!!
-                data.addAll(resp)
-                f2 = true
-            }
+                override fun onFailure(call: Call<ArrayList<Contest>?>, t: Throwable) {
+                    e("Upcoming Contests", t.message.toString())
+                    f2 = true
 
-            override fun onFailure(call: Call<ArrayList<Contest>?>, t: Throwable) {
-                e("Upcoming Contests", t.message.toString())
-            }
-        })
+                }
+            })
+        } else
+            f2 = true
 
-        val retrofitDataAtCoder = retrofitBuilder.getAtCoder()
-        retrofitDataAtCoder.enqueue(object : Callback<ArrayList<Contest>?> {
-            override fun onResponse(
-                call: Call<ArrayList<Contest>?>,
-                response: Response<ArrayList<Contest>?>
-            ) {
-                Log.d("Upcoming Contests", "got Data140")
-                val resp = response.body()!!
-                data.addAll(resp)
-                f3 = true
-            }
+        if (atCoder) {
+            val retrofitDataAtCoder = retrofitBuilder.getAtCoder()
+            retrofitDataAtCoder.enqueue(object : Callback<ArrayList<Contest>?> {
+                override fun onResponse(
+                    call: Call<ArrayList<Contest>?>,
+                    response: Response<ArrayList<Contest>?>
+                ) {
+                    Log.d("Upcoming Contests", "got Data140")
+                    val resp = response.body()!!
+                    data.addAll(resp)
+                    f3 = true
+                }
 
-            override fun onFailure(call: Call<ArrayList<Contest>?>, t: Throwable) {
-                e("Upcoming Contests", t.message.toString())
-            }
-        })
+                override fun onFailure(call: Call<ArrayList<Contest>?>, t: Throwable) {
+                    e("Upcoming Contests", t.message.toString())
+                    f3 = true
+                }
+            })
+        } else
+            f3 = true
 
         GlobalScope.launch {
             while (true) {
                 if (f1 && f2 && f3) {
-
                     contestsData.postValue(data)
-                    for(x in data)
-                        e("AUTH App" , x.url)
+                    f1 = false
+                    f2 = f1
+                    f3 = f1
                     break
                 }
             }

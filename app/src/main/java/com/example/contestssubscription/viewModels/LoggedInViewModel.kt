@@ -14,14 +14,13 @@ class LoggedInViewModel(application: Application) : AndroidViewModel(application
     private var userLiveData: MutableLiveData<FirebaseUser> = authAppRepository.getUserLiveData()
     private var loggedOutLiveData: MutableLiveData<Boolean> =
         authAppRepository.getLoggedOutLiveData()
-    private var contestsData: LiveData<ArrayList<Contest>> = authAppRepository.getContests()
 
     fun logOut() {
         authAppRepository.logOut()
     }
 
-    fun getContests(): LiveData<ArrayList<Contest>> {
-        return contestsData
+    fun getContests(codeforces:Boolean,codeChef: Boolean,atCoder:Boolean): LiveData<ArrayList<Contest>> {
+        return authAppRepository.getContests(codeforces,codeChef,atCoder)
     }
 
     fun getUserLiveData(): MutableLiveData<FirebaseUser> {

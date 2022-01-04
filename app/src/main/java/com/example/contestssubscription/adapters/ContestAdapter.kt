@@ -17,6 +17,12 @@ class ContestAdapter(private val contests: ArrayList<Contest>) :
         val imageView: ImageView = view.findViewById(R.id.imageView)
     }
 
+    fun updateData(data:ArrayList<Contest>){
+        contests.clear()
+        contests.addAll(data)
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContestViewHolder {
         val adapterLayout =
             LayoutInflater.from(parent.context).inflate(R.layout.contest_item_layout, parent, false)
