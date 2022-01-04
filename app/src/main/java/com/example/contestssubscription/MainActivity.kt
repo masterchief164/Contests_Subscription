@@ -1,6 +1,5 @@
 package com.example.contestssubscription
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -40,16 +39,20 @@ class MainActivity : AppCompatActivity() {
         listener = NavController.OnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.about -> {
-                    supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.design_default_color_primary_dark)))
                     supportActionBar?.title = "About"
                 }
                 R.id.upcomingContests -> {
-                    supportActionBar?.setBackgroundDrawable(ColorDrawable(getColor(R.color.teal_700)))
                     supportActionBar?.title = "All Contests"
                 }
                 R.id.loginFragment -> {
                     supportActionBar?.title = "Login"
                     loggedInViewModel.logOut()
+                }
+                R.id.register->{
+                    supportActionBar?.title = "Register"
+                }
+                R.id.selectSites->{
+                    supportActionBar?.title = "Select Sites"
                 }
             }
         }
