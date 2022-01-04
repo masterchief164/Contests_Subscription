@@ -1,12 +1,11 @@
 package com.example.contestssubscription.data
 
 data class Contest(
+    val duration: String,
+    val end_time: String,
+    val in_24_hours: String,
     val name: String,
-    val startTimeSeconds: Int,
-    val durationSeconds: Int,
-    val frozen: Boolean,
-    val id: Int,
-    val phase: String,
-    val relativeTimeSeconds: Int,
-    val type: String
+    val start_time: String,
+    val status: String,
+    val url: String
 )

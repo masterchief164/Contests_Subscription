@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.contestssubscription.data.Contest
 import com.example.contestssubscription.R
+import com.example.contestssubscription.data.Contest
 
 class ContestAdapter(private val contests: ArrayList<Contest>) :
     RecyclerView.Adapter<ContestAdapter.ContestViewHolder>() {
@@ -30,8 +30,15 @@ class ContestAdapter(private val contests: ArrayList<Contest>) :
         else
             holder.contestName.text = item.name
 
-        holder.timeView.text = item.startTimeSeconds.toString()
-        holder.imageView.setImageResource(R.drawable.ic_launcher_background)
+        holder.timeView.text = item.start_time
+
+        when {
+            item.url.contains("codeforces",true) -> holder.imageView.setImageResource(R.mipmap.cf_icon_foreground)
+            item.url.contains("codechef",true) -> holder.imageView.setImageResource(R.mipmap.cc_icon_foreground)
+            item.url.contains("atcoder",true) -> holder.imageView.setImageResource(R.mipmap.at_icon_foreground)
+        }
+
+//        holder.imageView.setImageResource(R.drawable.ic_launcher_background)
 
     }
 
