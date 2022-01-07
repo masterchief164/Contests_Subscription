@@ -17,6 +17,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.Instant
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AuthAppRepository(private val application: Application) {
@@ -186,6 +191,18 @@ class AuthAppRepository(private val application: Application) {
         GlobalScope.launch {
             while (true) {
                 if (f1 && f2 && f3) {
+                    data.sortBy {it.start_time}
+                    for (x in data) {
+                        if (x.start_time[x.start_time.length - 1] == 'Z') {
+                            x.start_time = parseDate(x.start_time)
+                            x.end_time = parseDate(x.end_time)
+                        } else {
+                            x.start_time = transform(x.start_time)
+                            x.start_time = parseDate(x.start_time)
+                            x.end_time = transform(x.end_time)
+                            x.end_time = parseDate(x.end_time)
+                        }
+                    }
                     contestsData.postValue(data)
                     f1 = false
                     f2 = f1
@@ -195,6 +212,35 @@ class AuthAppRepository(private val application: Application) {
             }
         }
 
+    }
+
+    private fun transform(timeC: String):String{
+        var time = timeC
+        var tmp = time.indexOfFirst { it == ' ' }
+        time = time.substring(
+            0,
+            tmp
+        ) + "T" + time.substring(tmp + 1)
+        tmp = time.indexOfLast { it == ' ' }
+        time = time.substring(0, tmp) + ".000Z"
+        return time
+    }
+
+    private fun parseDuration(time: String): String {
+        val hours = time.toInt() / 3600
+        val minutes = (time.toInt() % 3600) / 60
+        return "$hours Hours $minutes minutes";
+    }
+
+    private fun parseDate(date: String): String {
+        val timeFormatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME
+        val offsetDateTime: OffsetDateTime = OffsetDateTime.parse(date, timeFormatter)
+        val parsedDate: Date = Date.from(Instant.from(offsetDateTime))
+        val calendar: Calendar = Calendar.getInstance()
+        calendar.time = parsedDate
+        var tmp = parsedDate.toString()
+        tmp = tmp.substring(0, tmp.length - 18);
+        return tmp;
     }
 
 }

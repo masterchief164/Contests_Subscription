@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/contest_site_icon"
             android:padding="4sp"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@mipmap/cf_icon_foreground"
             app:circularflow_defaultRadius="8sp"
             app:circularflow_radiusInDP="8sp"
             app:layout_constraintBottom_toBottomOf="parent"
