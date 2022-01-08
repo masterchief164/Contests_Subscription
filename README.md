@@ -1,6 +1,6 @@
 #  Android-Study-Jams
 
-Contests tracking App
+## Contests tracking App
 
 <b> Problem Statement: </b>
 
