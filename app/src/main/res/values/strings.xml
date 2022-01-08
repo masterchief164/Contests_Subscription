@@ -28,4 +28,8 @@
     <string name="atcoder">AtCoder</string>
     <string name="register">Register</string>
     <string name="name">Name</string>
+    <string name="link">Github Repo: <a href="https://github.com/masterchief164/Contests_Subscription">Contest Subscription</a></string>
+    <string name="aim_provide_lists_of_up_coming_contests_for_major_competitive_coding_platforms">Aim: Provide lists of up coming contests for major competitive coding platforms</string>
+    <string name="developer_shaswat_gupta">Developer: Shaswat Gupta</string>
+    <string name="contests_subscription_n_app">Contests Subscription \n App</string>
 </resources>

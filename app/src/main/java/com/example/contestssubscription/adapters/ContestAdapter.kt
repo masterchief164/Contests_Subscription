@@ -20,7 +20,6 @@ class ContestAdapter(private val contests: ArrayList<Contest>) :
     fun updateData(data:ArrayList<Contest>){
         contests.clear()
         contests.addAll(data)
-        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContestViewHolder {
@@ -43,9 +42,6 @@ class ContestAdapter(private val contests: ArrayList<Contest>) :
             item.url.contains("codechef",true) -> holder.imageView.setImageResource(R.mipmap.cc_icon_foreground)
             item.url.contains("atcoder",true) -> holder.imageView.setImageResource(R.mipmap.at_icon_foreground)
         }
-
-//        holder.imageView.setImageResource(R.drawable.ic_launcher_background)
-
     }
 
     override fun getItemCount() = contests.size
